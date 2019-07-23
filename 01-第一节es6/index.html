@@ -9,21 +9,14 @@
   </head>
   <body>
     <script>
-     var resule = new Promise(function(resolve ,reject ){
-       $.ajax({
-         url:"http://59.110.138.169/api/douban/movie/in_theaters",
-         method:"get",
-         success:function(val){
-          resolve(val)
-         },
-         failed:function(val){
-          reject(val)
-         }
-       })
-     })
-     resule.then(function(val){
-       console.log(val)
-     })
+     {
+       let b = 20;
+       {
+         console.log(b);   //  20   
+          // let b = 30;
+          // console.log(b)
+       }
+     }
     </script>
   </body>
 </html>

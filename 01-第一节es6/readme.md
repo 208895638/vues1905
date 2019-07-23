@@ -58,6 +58,7 @@ console.log(j)
 ```
 
 + 什么时候使用const 什么时候使用let
+
 如果确定值不会改变 就使用const 如果确定改变的化就使用let
 
 ### 箭头函数 
@@ -73,37 +74,37 @@ var f = function (v) {
 };
 </script>
 ```
-  1. 不带参数的写法
-   ```
-    var f = () =>  a 
-    ```
-  2. 带一个参数的写法
-  ```
-    var f = a => a
-    ```
-  3. 带多个参数的写法 
-  ```
-    var f = (a,b) => a+b
-    ```
-  4. return 多行写法 
-  ```
-   var f = (a,b) => {
-      return a+b;
-  }
-  ```
-  5. 箭头函数的this指向 settimeout会改变this的指向 如果我们用箭头函数 箭头函数就指向父级。
-  在setInterval和setTimeout中传入函数时，函数中的this会指向window对象。
-  ```
-    var obj = {
-        num : 1,
-        add:function(){
-            setTimeout(() => {
-                console.log(this);
-            },300)
-        }
-    };
-    obj.add();
-  ```
+1. 不带参数的写法
+```
+var f = () =>  a 
+```
+2. 带一个参数的写法
+```
+var f = a => a
+```
+3. 带多个参数的写法 
+```
+var f = (a,b) => a+b
+```
+4. return 多行写法 
+```
+var f = (a,b) => {
+    return a+b;
+}
+```
+5. 箭头函数的this指向 settimeout会改变this的指向 如果我们用箭头函数 箭头函数就指向父级。
+在setInterval和setTimeout中传入函数时，函数中的this会指向window对象。
+```
+var obj = {
+    num : 1,
+    add:function(){
+        setTimeout(() => {
+            console.log(this);
+        },300)
+    }
+};
+obj.add();
+```
 ### 函数默认值
 在ES6之前，不能直接为函数的参数指定默认值，只能采取变通的方法。
 ```html
@@ -137,10 +138,12 @@ es6的模板字符串解决了以上问题
 <script>
     // 以前拼接字符串
     var html = '<ul>'+
-        '<li>1</li>'+
+        '<li cla="aaa">'+1+'</li>'+
         '<li>2</li>'+
     '</ul>'
     // 现在拼接字符串
+    // esc 下面的一个键
+    ``
     var html = `<ul>
         <li>1</li>
         <li>2</li>
@@ -160,6 +163,7 @@ es6的模板字符串解决了以上问题
 ### 变量解构赋值
 
 + 数组的解构赋值
+
 ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构
 
 ```html
@@ -170,7 +174,7 @@ ES6 允许按照一定模式，从数组和对象中提取值，对变量进行�
     console.log(a,b,c)
 </script>
 ```
-上面代码表示，可以从数组中提取值，按照对应位置，对变量赋值。
+上面代码表示，可以从数组中提取值，`按照对应位置`，对变量赋值。
 本质上，这种写法属于“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应的值。
 如果解构失败，变量的值等于undefined。
 ```html
@@ -226,7 +230,7 @@ console.log(newArr) // [1,2,3,4]
 </script>
 ```
 + Array.from
-Array.from方法用于将类对象转为真正的数组(类数组对象比如arguments)
+Array.from方法用于将`类对象`转为真正的数组(类数组对象比如arguments)
 类数组对象特点 表现像数组 却没有数组该有的方法 比如push
 ```html
 <script>
@@ -249,7 +253,7 @@ Array.from方法用于将类对象转为真正的数组(类数组对象比如arg
 
 + find/findIndex
   - find 
-  数组实例的find方法，用于找出`第一个符合条件的数组成员`。它的参数是一个回调函数，所有数组成员依次执行该回调函数，直到找出第一个返回值为true的成员，然后返回该成员。`如果没有符合条件的成员，则返回undefined`。
+  数组实例的find方法，用于找出`第一个符合条件的数组成员`。它的参数是一个回调函数，所有数组成员依次执行该回调函数，直到找出`第一个返回值为true`的成员，然后返回该成员。`如果没有符合条件的成员，则返回undefined`。
   find方法的回调函数可以接受三个参数，依次为当前的值、当前的位置和原数组。
   ```html
   <script>
@@ -288,7 +292,7 @@ console.log(s)
   `Set.prototype.size`：返回Set实例的成员总数。
   - size 方法
   `Set.prototype.add(value)`：添加某个值，返回 Set 结构本身。
-  `Set.prototype.delete(value)`：删除某个值，返回一个布尔值，表示删除是否成功。
+  `Set.prototype.delete(value)`：删除某个值，返回一个布尔值，表示删除是否成功。 // 删除成功 返回true 否则 false
   `Set.prototype.has(value)`：返回一个布尔值，表示该值是否为Set的成员。
   `Set.prototype.clear()`：清除
 
@@ -435,7 +439,7 @@ Promise实例生成以后，可以用then方法分别指定resolved状态和reje
 </script>
 ```
 
-### 常用的数组的操作 map、filter、foreach、some、every、includs、find、findIndex
+### 常用的数组的操作 map、filter、foreach、some、every、includs、find、findIndex 、reduce
 >  map的特点
 1. map() JavaScript 数组map()方法主要创建一个新的数组使用调用此数组中的每个元素上所提供的函数的结果。即对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组。
 ```
@@ -444,7 +448,7 @@ var list = [1,2,3,4];
             return ele*2
         });
         console.log(list,newList) // [1,2,3,4] [2,4,6,8]
-```
+```-
 
 2. forEach  方法对数组的每个元素执行一次提供的函数。
 ```
@@ -458,7 +462,7 @@ array1.forEach(function(element) {
 //  "b"
 //  "c"
 ```
-3. filter  方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。
+3. filter  方法创建一个新的数组，新数组中的元素是通过`检查指定数组中符合条件的所有元素`。
 ```
 var list = [1,2,3,4];
         var newList = list.filter(ele => ele > 2);
@@ -467,6 +471,7 @@ var list = [1,2,3,4];
 4. every()与some()方法都是JS中数组的迭代方法。
 
 every()是对数组中每一项运行给定函数，如果该函数对每一项返回true,则返回true。
+
 
 some()是对数组中每一项运行给定函数，如果该函数对任一项返回true，则返回true。
 ```

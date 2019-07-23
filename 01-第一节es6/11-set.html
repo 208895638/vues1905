@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var sets = new Set([1,2,3,4,1,2,3,5]);
+        // //console.log(sets)  //  12345
+        // //sets.add(3);
+
+        // // 数组去重方法
+        // var arr = [1,2,3,4,1,2,5,6]// 
+        // // 
+        // var arrs = Array.from(new Set(arr))
+        // console.log(arrs)
+
+        // var s = new Set([1,23,4]);
+        // s.add(5); // Set(4) {1, 23, 4, 5}
+        // //console.log(s.size) // 4 
+        // // s.delete(1) //
+        // // console.log(s) // Set(3) {23, 4, 5}
+        // var sets = s.has(23) // 
+        // console.log("has=>",sets) // true
+        // s.clear() ;
+        // console.log("clear=>",s) //Set(0)
+        var map = new Map();
+        map.set("aa","100");
+        map.set("aa","200");
+        map.set("bb","200");
+        map.delete("aa")
+        console.log(map) // Map(1) {"aa" => "100"}
+    </script>
+</body>
+</html>

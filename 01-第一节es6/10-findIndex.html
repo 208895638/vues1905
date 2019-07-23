@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //var arr = [1,2,3,4];
+        var arr = [
+            {
+                name:"张三",
+                age:40
+            },
+            {
+                name:"李四",
+                age:50
+            },
+            {
+                name:"王五",
+                age:60
+            }
+        ]
+        // findIndex如果没有找到符合条件的元素 返回的就是 -1
+        var index = arr.findIndex(ele => ele.age>60) // 
+        console.log(index) 
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.1/jquery.js"></script>
+</head>
+<body>
+    <script>
+        $(function(){
+            var pro = new Promise(function(resolve,reject){
+                $.ajax({
+                    url:"http://59.110.138.169/api/douban/movie/in_theaters",
+                    method:"get",
+                    success(val){
+                        resolve(val)
+                    },
+                    failed(val){
+                        reject(val)
+                    }
+                })
+            })
+            pro
+            .then(val =>{
+                console.log(val)
+            })
+            .catch(val =>{
+                console.log(val)
+            })
+        })
+    </script>
+</body>
+</html>

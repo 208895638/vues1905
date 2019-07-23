@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [1,2,3,4];
+        // some找到的是数组中某一项符合条件的值 如果找到就不会继续走  返回的是true
+        // some如果没有找到符合条件的元素 返回的是false
+        var newArr = arr.some(ele=>{
+            return ele > 4
+        });
+        console.log(newArr)
+    </script>
+</body>
+</html>

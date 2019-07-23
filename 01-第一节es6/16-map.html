@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [1,2,3,4];
+        // forEach不可以改变
+        // map可以改变数组中的每一项 
+        var newArr = arr.map(ele=>{
+           return ele = 2;
+        });
+        console.log(newArr)
+    </script>
+</body>
+</html>

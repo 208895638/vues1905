@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var fun = function(){
+
+        // }
+        // rueturn 出去我们的变量
+        // var fun = (val)=> val*3 ;
+        //     console.log(fun(3)) // 9
+        // var fun = function(val){
+        //     return val
+        // }
+        //  箭头函数的几种写法 
+        // // 1. 不带参数的写法
+        // var fun = () => 3;
+        // console.log(fun())
+        // 2. 带参数的写法
+        // var fun = (val) => val;
+        // console.log(fun(10))
+        // 3. 带多个参数的写法
+        // var fun = (a,b) => a+b;
+        // console.log(fun(1,2)) 
+        // 4. 箭头函数的第四中写法
+        // var fun = (a,b) => a+b;
+        // var fun = (a,b) => {
+        //     if(a<10){
+        //         return b
+        //     }else{
+        //         return "a>10"
+        //     }
+        // };
+        // console.log(fun(1,2))  // 2
+        // var fun = function(a,b){
+        //     if(a<10){
+        //         return b
+        //     }else{
+        //         return "a>10"
+        //     }
+        // }
+
+        // 箭头函数的重点  this指向  
+        var obj = {
+            num : 1,
+            add:function(){
+                console.log("外面this指向",this)  //  
+                // settimeout默认会改变this的指向
+                const that = this;
+                setTimeout(function(){
+                    console.log(that,this)
+                    that.num = 2
+                    console.log("settimeoutthis指向",this)
+                },1000)
+
+                // 箭头函数 this指向是父级
+
+                // setTimeout(() => {
+                //     console.log("箭头函数settimeoutthis指向",this)
+                // },300)
+            }
+        };
+        obj.add();
+    </script>
+</body>
+</html>
