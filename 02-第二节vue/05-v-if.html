@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app" >
+        <!-- v-if控制元素的显示和隐藏 是通过销毁dom和重建dom来实现的 -->
+        <div v-if="age>40">
+            {{ name }}
+        </div>
+        <p>v-if</p>
+        <hr>
+    </div>
+    <script src="./lib/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data () {
+                return {
+                    name : '王五',
+                    age:40
+                }
+            }
+        })
+    </script>
+</body>
+</html>

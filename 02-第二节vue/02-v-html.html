@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <!-- 区别  双大括号插值可以写多个  但是v-text只能写一次 -->
+        <!-- {{}} 缺点   会先展示{{ }} -->
+        <!-- 解决{{ }} 闪烁的问题  v-cloak -->
+        <p>
+            {{ name }} {{ age }}
+        </p>
+        <hr>
+        <!-- {{ name }} -->
+        <!-- 用于渲染文本 -->
+        <p v-text="age" ></p>
+        <p v-text="name"></p>
+    </div>
+    <script src="./lib/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data () {
+                return {
+                    name : '李四',
+                    age:40
+                }
+            }
+        })
+    </script>
+</body>
+</html>

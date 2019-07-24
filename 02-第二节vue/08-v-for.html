@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app" >
+      <ul>
+          <!-- <li v-for="ele in list">
+              {{ ele.name }} {{ ele.age }}
+          </li> -->
+          <!--  对象的值   对象的key 下标 -->
+          <li v-for="(val ,key, index) in objs">
+            {{ key }} {{ val }}  第{{ index }}页
+        </li>
+        <hr>
+        <li v-for="(ele,index) in num">
+                {{ ele }}   第{{ index }}页
+            </li>
+            <hr>
+        <li v-for="(ele,index) in str">
+            {{ ele }}   第{{ index }}页
+        </li>
+        <hr>
+        <li v-for="(ele,index) in stes">
+          sets:  {{ ele }}   第{{ index }}页
+        </li>
+      </ul>
+    </div>
+    <script src="./lib/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data () {
+                return {
+                    list:[
+                        {
+                           name : "张三",
+                           age:40
+                        },
+                        {
+                           name : "李四",
+                           age:50
+                        },
+
+                        {
+                           name : "王五",
+                           age:60
+                        }
+                    ],
+                    stes:new Set([1,2,3,3,4]),
+                    num:7,
+                    str:"qwer",
+                    objs :  {
+                        name : "张三",
+                        age:40
+                    },
+                }
+            }
+        })
+    </script>
+</body>
+</html>

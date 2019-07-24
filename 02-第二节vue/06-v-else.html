@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app" >
+        <!-- v-else必须结合v-if使用  -->
+        <div v-if="age == 40">
+            {{ name }}
+            <p v-else="age == 40">
+                    名称: {{ name }}
+            </p>
+        </div>
+        <!-- <div v-else="age">
+           名称: {{ name }}
+        </div> -->
+        <p>v-if</p>
+        <hr>
+    </div>
+    <script src="./lib/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data () {
+                return {
+                    name : '王五',
+                    age:40
+                }
+            }
+        })
+    </script>
+</body>
+</html>

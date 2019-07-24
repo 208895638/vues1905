@@ -75,26 +75,36 @@ var f = function (v) {
 </script>
 ```
 1. 不带参数的写法
-```
-var f = () =>  a 
+```html
+<script>
+  var f = () =>  a 
+</script>
 ```
 2. 带一个参数的写法
-```
-var f = a => a
+```html
+<script>
+  var f = a => a
+</script>
 ```
 3. 带多个参数的写法 
-```
-var f = (a,b) => a+b
+```html
+<script>
+  var f = (a,b) => a+b
+</script>
 ```
 4. return 多行写法 
-```
+```html
+<script>
 var f = (a,b) => {
     return a+b;
 }
+</script>
+
 ```
 5. 箭头函数的this指向 settimeout会改变this的指向 如果我们用箭头函数 箭头函数就指向父级。
 在setInterval和setTimeout中传入函数时，函数中的this会指向window对象。
-```
+```html
+<script>
 var obj = {
     num : 1,
     add:function(){
@@ -104,6 +114,8 @@ var obj = {
     }
 };
 obj.add();
+</script>
+
 ```
 ### 函数默认值
 在ES6之前，不能直接为函数的参数指定默认值，只能采取变通的方法。
@@ -440,18 +452,25 @@ Promise实例生成以后，可以用then方法分别指定resolved状态和reje
 ```
 
 ### 常用的数组的操作 map、filter、foreach、some、every、includs、find、findIndex 、reduce
->  map的特点
-1. map() JavaScript 数组map()方法主要创建一个新的数组使用调用此数组中的每个元素上所提供的函数的结果。即对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组。
-```
-var list = [1,2,3,4];
-        var newList = list.map(ele =>{
-            return ele*2
-        });
-        console.log(list,newList) // [1,2,3,4] [2,4,6,8]
-```-
 
-2. forEach  方法对数组的每个元素执行一次提供的函数。
++ map() JavaScript 数组map()方法主要创建一个新的数组使用调用此数组中的每个元素上所提供的函数的结果。即对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组。
+```html
+<script>
+var list = [1,2,3,4];
+var newList = list.map(ele =>{
+    return ele*2
+});
+console.log(list,newList) // [1,2,3,4] [2,4,6,8]
+</script>
+
 ```
+
++ forEach  方法对数组的每个元素执行一次提供的函数。
+foreach 相当于for循环 对数据进行便利
+foreach第一个特点 不能对每一项进行更改
+第二个特点  不能终止  
+```html
+<script>
 var array1 = ['a', 'b', 'c'];
 
 array1.forEach(function(element) {
@@ -461,59 +480,93 @@ array1.forEach(function(element) {
 //  "a"
 //  "b"
 //  "c"
+</script>
 ```
-3. filter  方法创建一个新的数组，新数组中的元素是通过`检查指定数组中符合条件的所有元素`。
-```
++ filter  方法创建一个新的数组，新数组中的元素是通过`检查指定数组中符合条件的所有元素`。
+```html
+<script>
 var list = [1,2,3,4];
-        var newList = list.filter(ele => ele > 2);
-        console.log(list,newList) // [1,2,3,4] [3,4]
+var newList = list.filter(ele => ele > 2);
+console.log(list,newList) // [1,2,3,4] [3,4]
+</script>
 ```
-4. every()与some()方法都是JS中数组的迭代方法。
++ every()与some()方法都是JS中数组的迭代方法。
 
 every()是对数组中每一项运行给定函数，如果该函数对每一项返回true,则返回true。
 
 
 some()是对数组中每一项运行给定函数，如果该函数对任一项返回true，则返回true。
-```
+```html
+<script>
 var arr = [ 1, 2, 3, 4, 5, 6 ]; 
  
- console.log( arr.some( function( item, index, array ){ 
-     return item > 3; 
- }));   // true 
-  
- console.log( arr.every( function( item, index, array ){ 
-     return item > 3; 
- }));  // false
+console.log( arr.some( function( item, index, array ){ 
+    return item > 3; 
+}));   // true 
+
+console.log( arr.every( function( item, index, array ){ 
+    return item > 3; 
+}));  // false
+</script>
+
 ```
    
-5. includes 方法用来判断一个数组是否包含一个指定的值，如果是返回 true，否则false。
-```
++ includes 方法用来判断一个数组是否包含一个指定的值，如果是返回 true，否则false。
+```html
+<script>
 [1, 2, 3].includes(2);     // true
 [1, 2, 3].includes(4);     // false
 [1, 2, 3].includes(3, 3);  // false
 [1, 2, 3].includes(3, -1); // true
 [1, 2, NaN].includes(NaN); // true
+</script>
 ```
-6. find和findIndex find()函数用来查找目标元素，找到就返回该元素，找不到返回undefined，而findIndex()函数也是查找目标元素，找到就返回元素的位置，找不到就返回-1。
-```
++ find和findIndex find()函数用来查找目标元素，找到就返回该元素，找不到返回undefined，而findIndex()函数也是查找目标元素，找到就返回元素的位置，找不到就返回-1。
+```html
+<script>
 var stu =[
-            {
-                "name": "张三",
-                "gender": "男",
-                "age": 20
-            },
-            {
-                "name": "王小毛",
-                "gender": "男",
-                "age": 20
-            },
-            {
-                "name": "李四",
-                "gender": "男",
-                "age": 20
-            }
-        ]
-        var item = stu.find((element) => (element.name == '李四'))  // 返回的是{name: "李四", gender: "男", age: 20}
-    var index = stu.findIndex((element)=>(element.name =='李四'))  // 返回的是索引下标：2
-    console.log(item , index)
+    {
+        "name": "张三",
+        "gender": "男",
+        "age": 20
+    },
+    {
+        "name": "王小毛",
+        "gender": "男",
+        "age": 20
+    },
+    {
+        "name": "李四",
+        "gender": "男",
+        "age": 20
+    }
+]
+var item = stu.find((element) => (element.name == '李四'))  // 返回的是{name: "李四", gender: "男", age: 20}
+var index = stu.findIndex((element)=>(element.name =='李四'))  // 返回的是索引下标：2
+console.log(item , index)
+</script>
+
+```
++ reduce 
+reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。
+  - total不带初始值的写法
+```html
+<script>
+ var arr = [1,2,3,4]; 
+ //current  当前的元素 total 总和
+ var totals = arr.reduce((total,current)=>{
+     console.log("total=>",total,"current=>",current,)
+     return total = total + current
+ })
+ console.log(totals)
+</script>
+```
+  - total带初始值的写法
+```html
+<script>
+var totals = arr.reduce((total,current)=>{
+    console.log("total=>",total,"current=>",current,)
+    return total = total + current
+},0)
+</script>
 ```
