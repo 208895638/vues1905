@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"> 
+        <ul>
+            <!--   -->
+            <li v-for="(item , index) in list" :key="item" @click="addClass(index)" :class="index == nowIndex ? 'red' : ''">
+                {{ item.name }}
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: '#box',
+            data(){
+                return {
+                    nowIndex:100,
+                    list:[
+                        {
+                            name:"张三"
+                        },
+                        {
+                            name:"李四"
+                        },
+                        {
+                            name:"王五"
+                        },
+                        {
+                            name:"赵六"
+                        }
+                    ]
+                }
+            },
+            methods: {
+                addClass(val){
+                    this.nowIndex = val;
+                    console.log(val)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

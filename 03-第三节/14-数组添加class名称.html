@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+        .red{
+            color: red;
+        }
+        .bg{
+            background: blue;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"> 
+        <div :class="classList">
+                元素 1
+        </div>
+        
+        <button @click="isAddClass = !isAddClass">
+            按钮
+        </button>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#box',
+            data(){
+                return {
+                    nowIndex:100,
+                    isAddClass:true,
+                    classList:[
+                        {
+                            red: true
+                        },
+                        {
+                            bg:true
+                        }
+                    ]
+                }
+            },
+            methods: {
+                addClass(val){
+                    this.nowIndex = val;
+                    console.log(val)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

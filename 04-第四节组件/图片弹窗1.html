@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/jq.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      ul {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+      }
+      dt img {
+        width: 200px;
+      }
+      .mask {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .mask dl dt,
+      .mask dl dd {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .mask dl dd img {
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="item in list" :key="item.id" @click="postMessageToCom(item)">
+          <dl>
+            <dt>
+              <img :src="item.img" alt="" />
+            </dt>
+            <dd>
+              {{ item.name }}
+            </dd>
+          </dl>
+        </li>
+      </ul>
+      <!-- 封装的弹窗组件 -->
+      <masks v-if="isMaskShow" :ismaskshow="isMaskShow" :id="id" :img="img" :name="name" @posteventtoparent="getChildMessage" @maskshow="closeMask"></masks>
+    </div>
+    <template id="mask">
+        <div class="mask" @click="maskShow">
+            <dl @click.stop="">
+                <dt>
+                    <input type="text" v-model="names">
+                </dt>
+                <dd>
+                    <img :src="img" alt="">
+                </dd>
+            </dl>
+        </div>
+    </template>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+              isMaskShow:false,
+              img:"",
+              id:"",
+              name:"",
+            list: [
+              {
+                img:
+                  "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573425442&di=4127f21ffc33c230edc4960a5306d78a&imgtype=0&src=http%3A%2F%2Fwww.17qq.com%2Fimg_qqtouxiang%2F13357165.jpeg",
+                name: "史泰龙",
+                id: 0
+              },
+              {
+                img:
+                  "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573560106&di=9adec5bb301d6d2453b0120ef708d822&imgtype=0&src=http%3A%2F%2Fztd00.photos.bdimg.com%2Fztd%2Fw%3D700%3Bq%3D50%2Fsign%3Da48763325a43fbf2c52ca4238045bbbd%2Fb7fd5266d0160924c9c3e421dd0735fae6cd3421.jpg",
+                name: "施瓦辛格",
+                id: 1
+              },
+              {
+                img:
+                  "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573655799&di=52b56d885dd077e904b7c80be78c0c72&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180418%2F451bab1f460d4ffa919a3faf88460a81.png",
+                name: "斯坦森",
+                id: 2
+              },
+              {
+                img:
+                  "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573676547&di=14522bfb93401212200c9c984c92d914&imgtype=0&src=http%3A%2F%2Fpic2.zhimg.com%2F50%2Fv2-73c3294084429ca165c2d3310fe59fdc_hd.jpg",
+                name: "强森",
+                id: 3
+              }
+            ]
+          };
+        },
+        methods: {
+            closeMask(val){
+                this.isMaskShow = val;
+            },
+            // 别人在使用我们封装好的组件的时候
+            postMessageToCom(val){
+                this.img = 111;
+                this.name=val.name;
+                this.id = val.id;
+                this.isMaskShow = !this.isMaskShow;
+            },
+            // 响应子组件传递过来的事件  
+            getChildMessage(val,val1){
+                var item = this.list.find(ele => ele.id == val1);
+                item.name = val;
+                console.log(val,val1,"子组件传递过来的值")
+            }
+        },
+        components: {
+            masks:{
+                template:"#mask",
+                // props:["img","name","id","ismaskshow"],
+                // 类型检查
+                props: {
+                  // 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
+                  img:String,
+                  name:String,
+                  id:Number,
+                  ismaskshow:Boolean
+                },
+                data () {
+                    return {
+                        names:this.name
+                    }
+                },
+                methods:{
+                    maskShow(){
+                        this.$emit("maskshow",!this.ismaskshow)
+                    }
+                },
+                watch: {
+                    names(){
+                        // 自定义事件传值 
+                        // 参数可以写多个
+                        this.$emit("posteventtoparent",this.names,this.id)
+                    }
+                }
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

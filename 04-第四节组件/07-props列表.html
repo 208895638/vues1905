@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/jq.js"></script>
+  </head>
+  <body>
+    <div id="app" >
+        <list :list="list" :nums="num"></list>
+    </div>
+    <template id="list">
+        <div>
+                <h2  @click="num1 ++">{{ num1 }}</h2>
+                <ul>
+                    <li v-for="item in list"> 名称:{{ item.name }} 年龄: {{ item.age }}</li>
+                </ul>
+        </div>
+        
+    </template>
+    <script>
+    //     父组件传值给子组件 通过props进行传值
+      var vm = new Vue(
+    {
+        el: "#app",
+        data() {
+          return {
+                num:10,
+                list:[
+                  {
+                      name:"张三",
+                      age : 40
+                  },
+                  {
+                      name:"李四",
+                      age : 50
+                  },
+                  {
+                      name:"王五",
+                      age : 60
+                  },
+              ]
+          };
+        },
+        components: {
+            "list" : {
+                // 子组件通过props接收
+                props:["list","nums"],
+                data: function () {
+                    return {
+                        count: 0,
+                        num1 : this.nums
+                    }
+                },
+                template: '#list'
+            }
+        }
+    }
+      );
+      
+    </script>
+  </body>
+</html>

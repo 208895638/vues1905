@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+           <div>
+               <!-- a data 1 -->
+               <button @click="a++">
+                    点我a++ : {{ a }}
+               </button>
+               <!-- b data 2 -->
+               <button @click="b++">
+                    点我b++ : {{ b }}
+               </button>
+               <button @click="c++">
+                    点我c++ : {{ c }}
+               </button>
+           </div>
+           <div>
+               a + b = {{ total }}
+           </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data(){
+                return {
+                   a:1,
+                   b:2,
+                   c:3
+                }
+            },
+            computed:{
+                total(){
+                    return this.a + this.b;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

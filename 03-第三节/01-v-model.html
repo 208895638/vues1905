@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        {{ age }}
+        <!--  表单修饰符  三个  -->
+        <!-- .trim  同来处理输入的空格  只能清除前后空格  -->
+        <!-- .lazy 在input框失焦的时候对数据进行同步   -->
+        <!-- .number  对输入的字符进行转换  转换成数字类型 -->
+        <!-- <input type="text" v-model.trim="age">
+        <input type="text" v-model.lazy="age"> -->
+        <input v-model.number="age" type="text">
+        <button v-on:click="add">
+            添加
+        </button>
+        <hr>
+        <ul>
+            <li v-for="item in list">
+               年龄: {{item.age}}
+            </li>
+        </ul>
+    </div>
+    
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data () {
+                return {
+                    name : '李四',
+                    age:40,
+                    list:[
+                        {
+                            age:30
+                        }
+                    ]
+                }
+            }
+        })
+    </script>
+    <!-- <div id="demo">
+        <span>Multiline message is:</span>
+        <p style="white-space: pre">{{ message }}</p>
+        <br>
+        <textarea v-model="message" placeholder="add multiple lines"></textarea>
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#demo',
+            data:{
+                message:'hello vue'
+            }
+        });
+    </script> -->
+    <!-- <div id="demo"> -->
+        <!--  v-model  -->
+        <!-- <input type="checkbox" id="checkbox" value="1" v-model="checked"  >
+        <label for="checkbox">{{ checked }}</label>
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#demo',
+            data:{
+                checked:true
+            }
+        });
+    </script> -->
+    <!-- <div id="demo">
+        <input type="checkbox" id="jack" value="Jack" :checked="checkedNames" >
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" :checked="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" :checked="checkedNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Checked names: {{ checkedNames }}</span>
+    </div>
+    <script type="text/javascript">
+    console.log([] == '')
+        var app=new Vue({
+            el:'#demo',
+            data:{
+                checkedNames:[]
+            }
+        });
+    </script> -->
+
+    <!-- <div id="demo">
+        <input type="radio" id="one" value="One" v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" value="Two" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>Picked: {{ picked }}</span>
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#demo',
+            data:{
+                    picked: ''
+            }
+        });
+    </script> -->
+    <!-- <div id="demo">
+        <select v-model="selected">
+            <option >A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <span>Selected: {{ selected }}</span>
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#demo',
+            data:{
+                    selected: null
+            }
+        });
+    </script> -->
+</body>
+</html>

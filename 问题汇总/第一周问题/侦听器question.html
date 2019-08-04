@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+    <!--  实现需求  -->
+    <div id="app">
+        <!-- 输入用户名称 -->
+        名称<input type="text" v-model="name">
+        <!-- 输入用户年宁 -->
+        年龄<input type="text" v-model="age">
+        <div>
+           
+           名称和年龄: {{ total }}
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data () {
+                return {
+                    name:"",
+                    age:"",
+                    total:""
+                }
+            },
+            watch: {
+                name(){
+                    // name属性变化之后执行一个方法
+                    ///  执行逻辑操作 
+                    this.total = this.name + this.age;
+                },
+                age(){
+                    // 年龄属性变化之后执行一个方法
+                    this.total = this.name + this.age;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

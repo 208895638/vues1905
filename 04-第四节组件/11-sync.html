@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/jq.js"></script>
+  </head>
+  <body>
+    <div id="app" >
+        
+            <list :num.sync="num"> </list>
+    </div>
+    <script>
+    //     父组件传值给子组件 通过props进行传值
+    // sync 直接更改父元素传递给子组件的值
+      var vm = new Vue(
+    {
+        el: "#app",
+        data() {
+          return {
+                num:1
+          };
+        },
+        components: {
+            "list" : {
+                template: '<h2 @click="updatenum">{{ num }}</h2>',
+                props:["num"],
+                methods: {
+                    updatenum(){
+                        this.$emit("update:num",4);
+                        // 告知父元素修改num
+                    }
+                }
+            }
+        }
+    }
+      );
+      
+    </script>
+  </body>
+</html>

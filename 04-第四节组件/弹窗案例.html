@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/jq.js"></script>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      ul{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+      }
+      dt img{
+        width: 200px;
+      }
+      .mask{
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .mask dl dt, .mask dl dd{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .mask dl dd img{
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+   
+    <div id="app">
+      <ul>
+        <li v-for="item in list" :key="item.id">
+          <dl>
+            <dt @click="postMessageToCom(item)">
+                <img :src="item.img" alt="">
+            </dt>
+            <dd>
+                {{ item.name }}
+            </dd>
+          </dl>
+        </li>
+      </ul>
+      <!-- 公共弹窗组件 -->
+      <masks v-if="isShow" :img="img" :title="title" :isshow="isShow" @aa = "updates" @updatemasks="getMaskChange"></masks>
+    </div>
+    <template id="masks">
+      <div class="mask" @click="updateMask">
+          <dl @click.stop="">
+              <dt>
+                <input type="text" v-model="titles">
+              </dt>
+              <dd>
+                <img :src="img" alt="">
+              </dd>
+            </dl>
+      </div>
+      
+    </template>
+    <script>
+      
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            img:"",
+            title:"",
+            currentId : "",
+            isShow:false,
+           list:[
+             {
+               img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573425442&di=4127f21ffc33c230edc4960a5306d78a&imgtype=0&src=http%3A%2F%2Fwww.17qq.com%2Fimg_qqtouxiang%2F13357165.jpeg",
+               name:"史泰龙",
+               id:0
+             },
+             {
+               img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573560106&di=9adec5bb301d6d2453b0120ef708d822&imgtype=0&src=http%3A%2F%2Fztd00.photos.bdimg.com%2Fztd%2Fw%3D700%3Bq%3D50%2Fsign%3Da48763325a43fbf2c52ca4238045bbbd%2Fb7fd5266d0160924c9c3e421dd0735fae6cd3421.jpg",
+               name:"施瓦辛格",
+               id:1
+             },
+             {
+               img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573655799&di=52b56d885dd077e904b7c80be78c0c72&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180418%2F451bab1f460d4ffa919a3faf88460a81.png",
+               name:"斯坦森",
+               id:2
+             },
+             {
+               img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564573676547&di=14522bfb93401212200c9c984c92d914&imgtype=0&src=http%3A%2F%2Fpic2.zhimg.com%2F50%2Fv2-73c3294084429ca165c2d3310fe59fdc_hd.jpg",
+               name:"强森",
+               id:3
+             }
+           ]
+          };
+        },
+        methods: {
+          postMessageToCom(val){
+            console.log(val);
+            this.img = val.img;
+            this.title = val.name;
+            this.currentId = val.id;
+            this.isShow = !this.isShow;
+          },
+          updates(val){
+            this.list[this.currentId].name = val;
+          },
+          getMaskChange(val){
+            this.isShow = val;
+            console.log(val)
+          }
+        },
+        components: {
+           masks:{
+             template:"#masks",
+             props:[
+               "img",
+               "title",
+               "isshow"
+             ],
+             watch: {
+              titles(){
+                console.log(111);
+                this.$emit("aa",this.titles)
+              }
+             },
+             methods:{
+              updateMask(){
+                this.$emit("updatemasks",!this.isshow);
+              }
+             },
+             data(){
+               return{
+                titles:this.title
+               }
+             }
+           }
+        }
+      });
+    </script>
+  </body>
+</html>

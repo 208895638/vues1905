@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        body,html{
+            width: 100%;
+            height: 100%;
+        }
+        .parent{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        ul{
+            background: blue;
+        }
+        li{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"> 
+        <!-- stop 阻止事件冒泡 -->
+        <div class="parent" v-if="isShow" @click="isShow = false">
+            <a href="https://www.baidu.com/" @click.stop.prevent="">百度</a>
+        </div>
+        <a href="https://www.baidu.com/" @click.prevent="">百度</a>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: '#box',
+            
+            data: {
+                arr:['apple','banana','orange','pear'],
+                isShow:true
+            },
+            methods:{
+                
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+           <input type="text" v-model="message">
+           {{ message }}
+           {{ num }}
+    </div>
+    <script>
+        //  侦听器一进入页面的时候是不会执行
+        var vm = new Vue({
+            el:"#app",
+            watch: {
+                // 如果 `question` 发生改变，这个函数就会运行
+                message: function (newQuestion, oldQuestion) {
+                    console.log(111)
+                    console.log("newQuestion" ,newQuestion )
+                    console.log( "oldQuestion" ,oldQuestion)
+                    this.num ++
+                    //this.message++;
+                }
+            },
+            data(){
+                return {
+                    num : 10,
+                    message : 111
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.1/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="box"> 
+        <ul>
+            <li v-for="item in newList" :key="item.id">
+               添加事件{{ item.addTime }}  性别:{{ item.sex  }}
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var list;
+        var promise = new Promise(function(resolve,reject){
+            $.ajax({
+                url:"http://59.110.138.169/api/ajax/user/list",
+                methods:"get",
+                success(val){
+                    resolve(val)
+                }
+            })
+        })
+        promise.then(function(val){
+            console.log(val.data.list)
+            list = val.data.list;
+            new Vue({
+                el: '#box',
+                data(){
+                    return {
+                        message:"vue",
+                        text:"",
+                        list:list
+                    }
+                },
+                computed: {
+                    newList(){
+                        this.list.forEach(ele => {
+                            if(ele.sex == 0){
+                                ele.sex = "男"
+                            }
+                            if(ele.sex == 1){
+                                ele.sex = "女"
+                            }
+                        });
+                        console.log(this.list,333);
+                        return this.list;
+                    }
+                }
+            })
+        })
+            
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="box"> 
+        <input type="text" v-model="searchVal">
+        <ul>
+            <li v-for="item in newList" :key="item">
+                {{ item.name }}
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: '#box',
+            data(){
+                return {
+                    searchVal:"",
+                    list:[
+                        {
+                            name:"张三"
+                        },
+                        {
+                            name:"李四"
+                        },
+                        {
+                            name:"王五"
+                        },
+                        {
+                            name:"赵六"
+                        }
+                    ]
+                }
+            },
+            computed: {  
+               newList(){
+                   if(this.searchVal == ""){
+                       return this.list
+                   }
+                   var item = this.list.find(ele => ele.name == this.searchVal);
+                   return [item]
+               }
+            },
+            methods: {
+                search(){
+                    var item = this.list.find(ele => ele.name == this.searchVal);
+                    this.list = [item] ;
+                    console.log(item)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

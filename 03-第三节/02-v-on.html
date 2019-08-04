@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="app" v-cloak>
+       {{ name }} {{ age }}
+        <input v-model.number="age" type="text">
+        <button v-on:click="name = '王五'">
+                改变姓名
+            </button> -->
+        <!-- <button v-on:click="add">
+            添加
+        </button> -->
+        <!-- v-on简写 @ -->
+        <!-- <button @click="add">
+                添加
+            </button>
+        <hr>
+        <ul>
+            <li v-for="item in list">
+               年龄: {{item.age}}
+            </li>
+        </ul>
+    </div>
+    
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data () {
+                return {
+                    name : '李四',
+                    age:40,
+                    list:[
+                        {
+                            age:30
+                        }
+                    ]
+                }
+            },
+            methods: {
+                add(){
+                    console.log(this)
+                    var obj = {
+                        age : this.age
+                    }
+                    this.list.push(obj)
+                }
+            }
+        })
+    </script> -->
+    <div id="box"> 
+            <input type="button" value="按钮1click" v-on:click="add($event,2)" />
+            <!-- <input type="button" value="按钮2mouseover" v-on:mouseover="add()" />
+            <input type="button" value="按钮3mouseout" v-on:mouseout="add()" />
+            <input type="button" value="按钮4mousedown" v-on:mousedown="add()" />
+            <input type="button" value="按钮5mouseup" v-on:mouseup="add()" />
+            <input type="button" value="按钮6dblclick" v-on:dblclick="add()" /> -->
+            <hr />
+            <ul>
+                <li v-for="value in arr">
+                    {{value}}
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            new Vue({
+                el: '#box',
+                data: {
+                    arr:['apple','banana','orange','pear']
+                },
+                methods:{
+                    add:function(val,val1){//方法
+                        console.log(val,val1)
+                        this.arr.push('tomato')
+                    }
+                }
+            })
+        </script>
+</body>
+</html>

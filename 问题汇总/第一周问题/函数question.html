@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+    <!--  实现需求  -->
+    <div id="app">
+        <!-- 输入用户名称 -->
+        名称<input type="text" v-model="name">
+        <!-- 输入用户年宁 -->
+        年龄<input type="text" v-model="age">
+        <div>
+            <!-- 计算属性里面的名称和data里面的计算属性不能重名 -->
+           名称和年龄: {{ total() }}{{ total() }}{{ total() }}
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            computed: {
+                
+            },
+            data () {
+                return {
+                    name:"",
+                    age:""
+                }
+            },
+            methods: {
+                total(){
+                    // 在函数里面执行的是逻辑操作
+                    console.log("函数",this);
+                    return this.name + this.age;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

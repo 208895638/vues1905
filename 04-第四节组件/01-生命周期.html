@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" >
+        {{ age }}
+        <button @click="age = '赵六'">
+           改变名称
+        </button>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            age:"张三"
+          };
+        },
+        // 实例刚在内存中被创建出来，此时，还没有初始化好 data 和 methods 属性  一般不做什么操作 没啥用
+        // 一般生命周期钩子带before的 都没啥用 基本用不到
+        beforeCreate() {
+            console.log("beforeCreate",this)
+        },
+        //  实例已经在内存中创建OK，此时 data 和 methods 已经创建OK，此时还没有开始 编译模板(模板 比如`{{}}`)
+        // 在create生命周期钩子里面 我们可以用ajax获取数据 对data里面的属性进行赋值操作 
+        created() {
+            this.age = "李四";
+            console.log("created",this)
+        },
+        // 此时已经完成了模板的编译，但是还没有挂载到页面中 
+        // 虚拟dom 已经准备完成 还没影渲染到页面之中
+        beforeMount() {
+            console.log("beforeMount",this)
+        },
+        // 此时，已经将编译好的模板，挂载到了页面指定的容器中显示
+        // 虚拟dom渲染到页面之中  在这一步可以看到数据的渲染
+        mounted() {
+            console.log("mounted",this)
+        },
+        // 状态更新之前执行此函数， 此时 data 中的状态值是最新的，但是界面上显示的 数据还是旧的，因为此时还没有开始重新渲染DOM节点
+        beforeUpdate() {
+            console.log("beforeUpdate",this)
+        },
+        // 实例更新完毕之后调用此函数，此时 data 中的状态值 和 界面上显示的数据，都已经完成了更新，界面已经被重新渲染好了！
+        updated() {
+            console.log("updated",this)
+        }
+      });
+    </script>
+  </body>
+</html>
