@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       
+    </style>
+    <script src="./lib/vue.js"></script>
+    <style>
+        /* 定义过渡开始的状态 定义开始的过渡动效*/
+        .fade-enter{
+            opacity: 0;
+        }
+        .fade-enter-active{
+            transition: 3s ease-in;
+        }
+        /* 定义开始时的结束状态 */
+        .fade-enter-to{
+            color: red;
+            opacity: 1;
+        }
+        /* 离开时的状态 离开时的过渡动效*/
+        .fade-leave{
+            opacity: 1;
+        }
+        .fade-leave-active{
+            transition: 3s ease-in;
+        }
+        .fade-leave-to{
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 动态组件 -->
+    <div id="app">
+        <div class="top">
+            <span @click="currentComponent ='login'">登陆</span>
+            <span @click="currentComponent ='register'">注册</span>
+        </div>
+        <div class="bot">
+            <!-- 通过transition 可以实现过渡动效 -->
+            <!-- 过渡效果很差   -->
+            <!-- mode  out-in  执行的动画过程是先离开再显示  -->
+            <!--  mode  in-out  执行的动画过程是先 先显示再离开  -->
+            <!-- 没加mode  动画同时执行  -->
+            <!-- <transition name="fade">
+                <component :is="currentComponent"></component>
+            </transition> -->
+            <!-- 加mode之后  控制动画过程  先显示或者隐藏 或者先隐藏或者显示 -->
+            <transition name="fade" mode="out-in">
+                <component :is="currentComponent"></component>
+            </transition>
+        </div>
+    </div>
+    <template id="login">
+        <div>
+            登陆组件
+        </div>
+    </template>
+    <template id="register">
+        <div>
+           <input type="text">
+        </div>
+    </template>
+    <script>
+       
+        var vm = new Vue({
+            el:"#app",
+            data(){
+                return {
+                    shows:true,
+                    // 当前的组件名称
+                    currentComponent:"login"
+                }
+            },
+            methods:{
+              
+            },
+            components: {
+                login:{
+                    template:"#login"
+                },
+                register:{
+                    template:"#register"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

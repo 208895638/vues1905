@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       
+    </style>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <h2>子组件</h2> -->
+        <!-- 写在组件里面的变量或者方法 默认查找的的是父作用域里面的属性或者方法 -->
+        <!-- 可以理解为props传值 -->
+        <!-- slot相比props传值  节省了很多步骤 -->
+        <com >
+            <div @click="updates">
+               {{ age }}
+            </div>
+        </com>
+    </div>
+  
+    <script>
+       
+        var vm = new Vue({
+            el:"#app",
+            data(){
+                return {
+                    age:40
+                }
+            },
+            methods:{
+                updates(){
+                    this.age++
+                }
+            },
+            components: {
+                com:{
+                    props:[
+                        "age"
+                    ],
+                    template:"<h2>子组件<slot>slot标签</slot> </h2>",
+                    data(){
+                        return {
+                           
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

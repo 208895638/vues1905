@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/jq.js"></script>
+    <script src="./a.js"></script>
+  </head>
+  <body>
+    <div id="app" >
+        <!--  混入可以理解为一些公共的属性或者方法 可以混入到当前的实例中  -->
+        <!-- 如果当前的实例中也有相同的属性或者方法的化 以当前的属性或者方法为主 -->
+        <div @click="alerts">
+                {{ list }}
+        </div>
+        
+    </div>
+    
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        mixins: [obj],
+        data() {
+          return {
+            name:"王五",
+            list:[1,1,1,1]
+          };
+        },
+        methods: {
+            alerts(){
+                alert("当前组件里面的方法!")
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

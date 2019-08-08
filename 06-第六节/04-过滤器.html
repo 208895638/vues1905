@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in list"> 
+                {{ item.name | names}}  {{ item.age | updateAge }}  
+            </li>
+        </ul>
+    </div>
+
+    
+    <script>
+    //    过滤器  对数据进行过滤
+    // 全局过滤器和局部过滤器
+        // filter
+        ///  Vue.filter
+        Vue.filter("names",function(val){
+            if(val == "李四"){
+                return "张四"
+            }else{
+                return val
+            }
+        })
+        var vm = new Vue({
+            el:"#app",
+            data(){
+                return {
+                   list:[
+                       {
+                           name:"张三",
+                           age:40
+                       },
+                       {
+                           name:"李四",
+                           age:30
+                       },
+                       {
+                           name:"王五",
+                           age:20
+                       },
+                   ]
+                }
+            },
+            filters: {
+                updateAge(val){
+                    if(val<=30){
+                        return 50
+                    }else{
+                        return val
+                    }
+                }
+            },
+            methods:{
+              
+            }
+        })
+    </script>
+</body>
+</html>

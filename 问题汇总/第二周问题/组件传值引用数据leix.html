@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/jq.js"></script>
+  </head>
+  <body>
+    <div id="app" >
+        <!-- 引用数据 类型  object array 直接往组件里面传递引用数据类型 违反了单向数据流-->
+        <button-counter :person = "person" ></button-counter>
+    </div>
+    <script>
+    //     父组件传值给子组件 通过props进行传值
+      var vm = new Vue(
+    {
+        el: "#app",
+        data() {
+          return {
+              name : "张三",
+              age:40,
+              person:{
+                  age:40,
+                  name:"张三"
+              }
+          };
+        },
+
+        components: {
+            "button-counter" : {
+                // 子组件通过props接收
+                props:["person"],
+                data: function () {
+                    return {
+                        count: 0
+                    }
+                },
+                template: '<div><button @click="person.age++">{{ person.age }}</button></div>'
+            }
+        }
+    }
+      );
+      
+    </script>
+  </body>
+</html>

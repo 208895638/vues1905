@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       
+    </style>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <h2>子组件</h2> -->
+        
+        <com>
+            <div>
+                div标签
+            </div>
+            <p>
+                文字
+            </p>
+            <!-- 文字
+            <img src="" alt="">
+            <com1></com1> -->
+        </com>
+        <!-- 想在组件里面插入内容或者标签  我们可以使用插槽 -->
+    </div>
+  
+    <script>
+       
+        var vm = new Vue({
+            el:"#app",
+            data(){
+                return {
+                }
+            },
+            methods:{
+              
+            },
+            components: {
+                com:{
+                    template:"<h2>子组件<slot></slot></h2>"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

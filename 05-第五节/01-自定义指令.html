@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       
+    </style>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-focus="1+1" value="123">
+    </div>
+  
+    <script>
+        // 全局指令
+        // 在钩子函数里面执行js操作
+        // Vue.directive("focus", {
+        //     bind(el,binding){  // 当指令第一绑定到标签的时候触发的钩子函数  在这个时候还没有渲染进dom里面  在虚拟dom里面绑定
+        //         console.log(el,binding,"绑定");
+        //         el.style.fontSize="50px";
+        //     },
+        //     inserted(el,binding){  // 当指令插入到dom的时候触发的钩子函数  
+        //         console.log(el,binding,"插入");
+        //         el.focus();
+        //     }
+        // })
+        
+        var vm = new Vue({
+            el:"#app",
+            data(){
+                return {
+                }
+            },
+            methods:{
+              
+            },
+            directives:{
+                // focus:{
+                //     bind(el,binding){  // 当指令第一绑定到标签的时候触发的钩子函数  在这个时候还没有渲染进dom里面  在虚拟dom里面绑定
+                //         console.log(el,binding,"绑定");
+                //         el.style.fontSize="50px";
+                //     },
+                //     inserted(el,binding){  // 当指令插入到dom的时候触发的钩子函数  
+                //         console.log(el,binding,"插入");
+                //         el.focus();
+                //         el.style.color="red"
+                //     }
+                // }
+                //  指令简写
+               focus(el,binding){
+                    console.log(binding)
+                el.style.color="red";
+                el.style.fontSize="50px";
+               }
+            }
+        })
+    </script>
+</body>
+</html>

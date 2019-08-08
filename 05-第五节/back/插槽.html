@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <h2>文字</h2> -->
+        <!-- 在组件里面可以插入任何内容 -->
+        <com>
+            <!-- 编译作用域  在组件里面写的属性查找的是父级作用域里面的属性或者方法 -->
+            <!-- 具名插槽  可以知道组件里面的元素渲染的位置 -->
+            <!-- <template v-slot:main>
+                <div>
+                        {{ name }}
+                </div>
+            </template> -->
+            <!-- 作用域插槽 获取子组件里面的属性或者方法-->
+               <template v-slot:default="slotProps">
+                   {{ slotProps.age }}
+               </template>
+        </com>
+    </div>
+  
+    <script>
+        // Vue.component
+        var vm = new Vue({
+            el:"#app",
+            data(){
+                return {
+                    name:"张三"
+                }
+            },
+            components: {
+                com:{
+                    // <slot>占位文字</slot>  后备内容
+                    template:"<div>组件内容<slot  :age='age'>占位文字</slot></div>",
+                    data(){
+                        return {
+                            age:40
+                        }
+                        
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

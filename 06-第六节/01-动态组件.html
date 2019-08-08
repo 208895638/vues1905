@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       
+    </style>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <!-- 动态组件 -->
+    <div id="app">
+        <div class="top">
+            <span @click="currentComponent ='login'">登陆</span>
+            <span @click="currentComponent ='register'">注册</span>
+        </div>
+        <div class="bot">
+            <!-- 使用component 可以完成组件的动态切换 -->
+            <!-- keep-alive  缓存状态 -->
+            <keep-alive>
+                <component :is="currentComponent"></component>
+            </keep-alive>
+            <!-- <login v-if="shows"></login>
+            <register v-else></register> -->
+        </div>
+    </div>
+    <template id="login">
+        <div>
+            登陆组件
+        </div>
+    </template>
+    <template id="register">
+        <div>
+           <input type="text">
+        </div>
+    </template>
+    <script>
+       
+        var vm = new Vue({
+            el:"#app",
+            data(){
+                return {
+                    shows:true,
+                    // 当前的组件名称
+                    currentComponent:"login"
+                }
+            },
+            methods:{
+              
+            },
+            components: {
+                login:{
+                    template:"#login"
+                },
+                register:{
+                    template:"#register"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

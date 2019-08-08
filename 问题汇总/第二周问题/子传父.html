@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/jq.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+
+        }
+        body,html{
+            width: 100%;
+            height: 100%;
+        }
+        .mask{
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="app" >
+        <!-- 引用数据 类型  object array 直接往组件里面传递引用数据类型 违反了单向数据流-->
+        <button @click="isMaskShow = !isMaskShow">
+            显示弹窗
+        </button>
+        <masks v-if="isMaskShow" :is-mask-show.sync="isMaskShow"></masks>
+    </div>
+    <template id="mask">
+        <div class="mask">
+            <button >确定</button>
+            <button @click="closeMask">取消</button>
+        </div>
+    </template>
+    <script>
+    //     父组件传值给子组件 通过props进行传值
+      var vm = new Vue(
+    {
+        el: "#app",
+        data() {
+          return {
+              isMaskShow:false
+          };
+        },
+
+        components: {
+            masks : {
+                // 子组件通过props接收
+                props:["isMaskShow"],
+                data: function () {
+                    return {
+                        count: 0
+                    }
+                },
+                template: '#mask',
+                methods: {
+                    closeMask(){
+                        // 子组件向父组件传值  通过自定义事件 this.$emit
+                        this.$emit("update:isMaskShow",!this.isMaskShow)
+                    }
+                }
+            }
+        }
+    }
+      );
+      
+    </script>
+  </body>
+</html>

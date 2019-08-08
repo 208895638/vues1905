@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       *{
+           margin: 0;
+           padding: 0;
+       }
+       .header{
+           display: flex;
+           align-items: center;
+           height: 50px;
+       }
+       .left,.cen,.right{
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       }
+       .left{
+           width: 50px;
+           border-right: 1px solid red;
+       }
+       .cen{
+           flex: 1;
+       }
+       .right{
+           width: 50px;
+           border-left: 1px solid red;
+       }
+    </style>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <com>
+            <template v-slot:left>
+                <img src="./imgs/return.png" alt="" @click="ale">
+            </template>
+            <template v-slot:cen>
+                <input type="text">
+            </template>
+            <template v-slot:right>
+                <button>右边</button>
+            </template>
+        </com>
+    </div>
+    <template id="header">
+        <div class="header">
+            <div class="left">
+                <slot name="left"></slot>
+            </div>
+            <div class="cen">
+                <slot name="cen"></slot>
+            </div>
+            <div class="right">
+                <slot name="right"></slot>
+            </div>
+        </div>
+    </template>
+    <script>
+       
+        var vm = new Vue({
+            el:"#app",
+            data(){
+                return {
+                    age:40
+                }
+            },
+            methods: {
+                ale(){
+                    alert(123)
+                }
+            },
+            components: {
+                com:{
+                   template:"#header"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

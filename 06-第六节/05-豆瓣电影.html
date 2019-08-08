@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/jq.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in list"> 
+               添加事件:{{ item.addTime }} 性别:{{ item.sex | updateSex }}
+            </li>
+        </ul>
+    </div>
+
+    
+    <script>
+    //    过滤器  对数据进行过滤
+        // filter
+        var vm = new Vue({
+            el:"#app",
+            data(){
+                return {
+                   list:[
+                       {
+                           name:"张三",
+                           age:40
+                       },
+                       {
+                           name:"李四",
+                           age:30
+                       },
+                       {
+                           name:"王五",
+                           age:20
+                       },
+                   ]
+                }
+            },
+            filters: {
+                updateSex(val){
+                    if(val == 0){
+                        return "男"
+                    }else if(val == 1){
+                        return "女"
+                    }
+                }
+            },
+            methods:{
+              
+            },
+            created () {
+                const _this = this;
+                $.ajax({
+                    type:"get",
+                    url:"http://59.110.138.169/api/ajax/user/list",
+                    success(val){
+                        _this.list = val.data.list;
+                        console.log(val)
+                    }
+                })
+            }
+        })
+    </script>
+</body>
+</html>

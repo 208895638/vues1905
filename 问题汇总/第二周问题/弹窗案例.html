@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .clearfix:after {/* 给浮动元素的父级元素加上class='clearfix' */
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+        }
+        .clearfix {
+            zoom: 1;/* 在IE6/7中,利用zoom:1触发haslayout属性 */
+        }
+        ul{
+           width: 900px;
+           margin: 50px auto;
+        }
+        li{
+            border: 1px solid red;
+            width: 200px;
+            float: left;
+            margin: 20px;
+        }
+        .mask{
+            position: fixed;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.6);
+            top: 0;
+            left: 0;
+        }
+        .mask img{
+            width: 80%;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+    <script src="./mock.js"></script>
+</head>
+<body>
+    <div id="app">
+      <ul class="clearfix">
+                <lists
+                v-for="item in list" 
+                :key="item.id"
+                :imgurl="item.imgUrl"
+                :id="item.id" 
+                :isshow.sync="item.isshow"
+                :title="item.title"
+                :ismaskshow.sync="ismaskshow"
+                @toparentid="del"
+                ></lists>
+            
+      </ul>
+      <masks :ismaskshow.sync="ismaskshow"></masks>
+    </div>
+    <template id="list">
+        <li>
+            
+            <div class="top">
+                <img :src="imgurl" alt="">
+            </div>
+            <div class="cen">
+                <div v-if="!isshow">
+                    {{ title }}
+                </div>
+                <input v-else  v-focus id="ipt" @blur="upt" type="text" v-model="title">
+            </div>
+            <div class="bot">
+                <button @click="del(id)">
+                    删除
+                </button>
+                <button @click="update">
+                    编辑
+                </button>
+                <button @click="getPhoto(imgurl)">
+                    查看大图
+                </button>
+            </div>
+        </li>
+        </template>
+        <template id="mask">
+            <div class="mask" v-if="ismaskshow" @click="hideBg">
+                <img @click.stop="" :src="imgurl" alt="">
+            </div>
+        </template>
+    <script>
+       var bus = new Vue();
+       Vue.directive("focus",{
+           binding(){
+
+           },
+           inserted(el){
+            el.focus();
+            el.style.color="red"
+           }
+       })
+        var vm = new Vue({
+            el:"#app",
+            data(){
+                return {
+                   list:"",
+                   ismaskshow:false
+                }
+            },
+            methods:{
+               init(){
+                var mocks = Mock.Random;
+                var goodsList = [];
+                for(var i = 0 ; i< 5;i++){
+                    let obj = {};
+                    obj.id = mocks.guid();
+                    obj.imgUrl = mocks.dataImage('200x100');
+                    obj.title = mocks.ctitle();
+                    obj.isshow=false
+                    goodsList.push(obj);
+                }
+                
+                this.list = goodsList;
+                console.log(this.list)
+               },
+               del(val){
+                   var index = this.list.findIndex(ele => ele.id == val);
+                   this.list.splice(index,1)
+               }
+            },
+            components: {
+                masks:{
+                    template:"#mask",
+                    props:[
+                        "ismaskshow",
+                    ],
+                    data(){
+                        return{
+                            imgurl:""
+                        }
+                    },
+                    methods:{
+                        hideBg(){
+                            this.$emit("update:ismaskshow",!this.ismaskshow)
+                        }
+                    },
+                    created(){
+                        bus.$on("photoevents",(val)=>{
+                            this.imgurl = val;
+                            console.log(val,333)
+                        })
+                    }
+                },
+                lists:{
+                    props:["imgurl","id","title","isshow","ismaskshow"],
+                    // props:{
+                    //     imgurl:String,
+                    //     id:String,
+                    //     title:String
+                    // },
+                    template:"#list",
+                    created(){
+                        //console.log(this.imgurl,111)
+                    },
+                    methods:{
+                        del(val){
+                            this.$emit("toparentid",val)
+                        },
+                        update(){
+                            this.$emit("update:isshow",!this.isshow);
+                            // setTimeout(function(){
+                            //     var ele =document.getElementById("ipt");
+                            //     console.log(ele)
+                            //     ele.focus();
+                            // });
+                            // nextTick 为了在数据变化之后等待 Vue 完成更新 DOM，可以在数据变化之后立即使用 Vue.nextTick(callback)。这样回调函数将在 DOM 更新完成后被调用。
+                            // this.$nextTick(function(){
+                            //     var ele =document.getElementById("ipt");
+                            //     console.log(ele)
+                            //     ele.focus();
+                            // })
+                        },
+                        getPhoto(val){
+                            // 控制mask的显示和隐藏
+                            // sync
+                            this.$emit("update:ismaskshow",!this.ismaskshow)
+                            bus.$emit("photoevents",val)
+                        },
+                        upt(){
+                            this.$emit("update:isshow",!this.isshow);
+                        }
+                    }
+                }
+            },
+            created () {
+                this.init();
+            }
+            
+        })
+    </script>
+</body>
+</html>
