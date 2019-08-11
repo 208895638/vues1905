@@ -2,19 +2,25 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="{ name: 'about', params: { id: '123' }}">About</router-link>
+      <router-link :to="{name:'about',params:{id:123}}">跳转到mine页</router-link>
+      <router-link :to="{name:'about',params:{id:'2'}}">About</router-link>
     </div>
     <router-view/>
   </div>
 </template>
 <script>
-import a from "./a.js"
 export default {
-  
+  created () {
+    console.log(this)
+  }
 }
 </script>
 
 <style lang="scss">
+.router-link-active{
+  color: red!important;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

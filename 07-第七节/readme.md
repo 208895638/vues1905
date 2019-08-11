@@ -1,10 +1,20 @@
 ## vue-cli
 使用vue开发大型项目时，需要考虑到目录结构、项目构建以及部署、热加载、代码单元化测试等事情，如果手动完成这些，效率非常低，一般情况下我们使用脚手架完成这样的工作。在vuejs的生态中，我们可以使用vue-cli来快速的构建项目。
 ## 使用脚手架的好处
-脚手架是基于webpack搭建的开发环境
+vue-cli是vue官方提供的脚手架工具,脚手架是基于webpack搭建的开发环境
+
 + 可以愉快的使用es6语法而不必担心兼容问题
+
 + 打包和压缩文件为一个js文件 
+
 + 页面自动刷新 
+## npm
+npm是安装node之后自带的一个包管理工具 安装依赖通过npm安装  npm install
+## 依赖 
+项目运行需要的一些东西 这些东西存放在node_modules里面 把node_modules里面的文件叫做依赖
+## 淘宝镜像  
+
+安装淘宝镜像之后 我们安装依赖的时候就国内镜像里面安装 
 
 ### 搭建vue-cli开发环境
 1. 在命令行里面输入下面这个命令 这个命令是用来安装vue-cli
@@ -16,6 +26,24 @@ npm install -g @vue/cli
 3. 创建vue的项目  vue create my-project
 
 
+### 目录 
++ src  工作目录  
++ assets 存放的静态资源目录 
++ components 存放的是公共组件的目录
++ views 存放的是一个一个单独的页面 
+views 页面规范 
+  - views存放的是单独的页面  
+  - 页面可以理解为views下的文件夹 比如home文件夹代表home页面 
+  - 页面由多个组件拼凑而成 
+  - 多个组件存放的位置 在当前页面的components文件夹里面
++ App.vue 是我们的一个根组件  其他页面会渲染到我们App.vue里面
++ main.js 项目的入口文件 
++ .gitignore 提交git的时候忽略的文件
++ babel.config.js  把es6的代码转换成es5 
++ package.json 是包管理配置文件 存放的是项目所需要的依赖
+  - script 标签里面存放的是命令配置  执行的时候执行npm run + 命令
+### webpack 
+vue-cli内置集成了webpack  webpack能css、js、页面、image、video字体文件等打包成一个js文件 这个js文件会动态的插入到public里面的index.html里面 webpack首先默认查找main.js 根据main.js里面的配置 把这些东西打包进app.js里面
 
 ### es6模块化 
 模块功能主要由两个命令构成：export和import。export命令用于规定模块的对外接口，import命令用于输入其他模块提供的功能。
@@ -25,7 +53,7 @@ npm install -g @vue/cli
 <script>
 var str  = "张三" ;
 var fuc = function(){
-    alert(str)
+    alert(str)0
 }
 export var firstName = 'Michael';
 export var lastName = 'Jackson';
@@ -128,10 +156,11 @@ import {crc32} from 'crc32'; // 输入
 js
 
 ### 单页面与多页面 
-vue-cli生成的页面叫单页面  
+
+vue-cli生成的项目叫单页面应用
 
 + 单页面 
-单页面应用（SPA），通俗一点说就是指只有一个主页面的应用，浏览器一开始要加载所有必须的 html, js, css。所有的页面内容都包含在这个所谓的主页面中。但在写的时候，还是会分开写（页面片段），然后在交互的时候由路由程序动态载入，单页面的页面跳转，仅刷新局部资源。
+单页面应用（SPA），通俗一点说就是指只有一个主页面的应用，浏览器一开始要加载所有必须的 html, js, css。所有的页面内容都包含在这个所谓的主页面中。但在写的时候，还是会分开写（页面片段），然后在交互的时候由路由程序动态载入，单页面的页面跳转，仅刷新局部资源。单页面应用跳转的时候不会请求服务器。
 + 多页面 
 多页面（MPA），就是指一个应用中有多个页面，页面跳转时是整页刷新
 
@@ -143,9 +172,15 @@ vue-cli生成的页面叫单页面
 + 页面效果会比较炫酷（比如切换页面内容时的专场动画）
 
 ### 单页面缺点
-+ 不利于seo
+
++ 不利于seo  vue的项目首先不考虑seo
+
 + 初次加载时耗时多
+
 + 页面复杂度提高很多
+
+
+### 其他注意事项  @  scoped
 
 ### 案例 
 vue-cli重构图片弹窗  及安装swiper及使用 

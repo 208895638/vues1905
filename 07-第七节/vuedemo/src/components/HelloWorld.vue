@@ -1,6 +1,19 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <!-- .hello h1{}
+          .hello  p {
+
+          }
+          .hello{
+            p{
+
+            }
+            h1{
+
+            }
+          }
+     -->
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -30,20 +43,38 @@
 </template>
 
 <script>
-import{ a } from "./index.js";
-console.log(a)
+//  export default es6写法
 export default {
-  name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data () {
+    return {
+      
+    }
+  },
+  methods: {
+    
+  },
+  created () {
+    
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped lang="scss">
+// scoped 代表在style里面写的样式 只能应用与当前的组件 
+// lang="scss" 可以使用scss 预处理器  
+.hello {
+  h1{
+    color: red;
+  }
+}
 h3 {
   margin: 40px 0 0;
+  color: red;
 }
 ul {
   list-style-type: none;

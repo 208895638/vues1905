@@ -30,8 +30,6 @@
 </template>
 
 <script>
-import{ a } from "./index.js";
-console.log(a)
 export default {
   name: 'HelloWorld',
   props: {

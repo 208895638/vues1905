@@ -7,9 +7,45 @@
     <title>Document</title>
 </head>
 <body>
-    <script type="module">
-        import {firstName} from "./a.js";
-        console.log(firstName)
+    <div id="app">
+
+    </div>
+    <!-- 不用模块的缺点    -->
+    <!-- 1. 很容易造成变量污染  -->
+    <!-- 2. 如果想使用jq方法  事先必须在页面里面引入 假设一个页面引入几十个js文件  不光查找 不方便  而且还有顺序加载的问题  -->
+    <!-- <script src="./main.js"></script>
+    <script src="./jq.js"></script> -->
+    
+    <!-- <script>
+
+        //   如果用script标签引入的方式  js变量是挂载window上面的  很容易造成变量污染 
+        var a = 100;
+        console.log(a)  // 10
+        console.log(b)  // 20 
+        //console.log(c())  // alert(20)
+    </script> -->
+    <script type="module"> 
+    //   提前声明了 我们引入了main.js
+    //   用模块都是提前声明 需要用的文件
+        // import { a , b , c } from "./main.js";
+        //import vue from "./vue.js";
+        //a = 100;
+        // import {  d , fun } from "./main.js"
+        // console.log(d , fun );
+        //  * 代表所有的变量  起名叫做all
+        // import * as all from "./main.js" ;
+        // console.log(all);
+        // import all from "./main.js";
+        // console.log(all)
+
+        //  export 
+        import { a  , c} from "./main.js";
+        // export default 
+        import all from "./main.js";
+        //  export  export default   
+        // export 导出的变量 在引入的时候必须事先知道导出的有哪些变量 
+        //  export default 导出的时候 不必知道导出的有哪些东西 可以直接引入 
+        console.log(a,all)
     </script>
 </body>
 </html>
