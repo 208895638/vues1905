@@ -26,7 +26,7 @@ export default new Router({
   linkActiveClass:"v-active",
   routes: [
     {
-      //  /home/bj
+      //  /home/bj  由 home ==> home/wather  to home/wather from home to.length > from.length 代表进入 否则 返回
       path:"/home",
       component : home,
       //  嵌套路由 路由中的路由

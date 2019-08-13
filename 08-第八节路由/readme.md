@@ -25,7 +25,7 @@ ajax局部刷新
 ### npm安装vue路由
 > 这一步是安装路由 保存到我们package.json 里面的dependencies里面
 ```
-npm install vue-router --save
+cnpm install vue-router --save
 ```
 ### 路由起步
 
