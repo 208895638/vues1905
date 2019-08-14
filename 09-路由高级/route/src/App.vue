@@ -1,15 +1,38 @@
 <template>
   <div id="app">
     <div class="main">
-      <router-view/>
+      <router-view></router-view>
     </div>
-    <div id="nav" v-if="$route.meta.isfootshow">
-      <router-link to="/">首页</router-link> |
-      <router-link to="/about">个人信息页</router-link>
-    </div>
+   <!-- 关键怎么找到一个值 控制nav显示和隐藏 -->
+   
+   <div class="navs" v-if="$route.meta.isFootShow == true">
+     <router-link to="/">首页</router-link>|
+     <router-link to="/about">user页面</router-link>|
+     <router-link to="/login">login页面</router-link>
+   </div>
+   
   </div>
 </template>
+<script>
+export default {
+  data () {
+    return {
+        isfootshow:true
+    }
+  },
+  created () {
+    console.log(this.$route)
+  }
+}
+</script>
 <style lang="scss" scoped>
+.main{
+  flex: 1;
+}
+.navs{
+  border-top: 1px solid red;
+  padding: 10px;
+}
 #app{
   height: 100%;
   display: flex;

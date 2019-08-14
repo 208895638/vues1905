@@ -96,7 +96,7 @@ export default new Vuex.Store({
   }
 })
 ```
-> 提交载荷（Payload） 其实就是提交的时候附带参数
+> 提交载荷（Payload） 其实就是提交的时候附带参数 只能提交一个载荷
 
 ```
 export default new Vuex.Store({
