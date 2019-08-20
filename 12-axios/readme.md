@@ -1,5 +1,8 @@
+
 # axios
+
 Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中。 类似jq的$.ajax
+axios是一个已经封装好的ajax 的一个库
 ## axios特性
 
 + 从浏览器中创建 `XMLHttpRequests`
@@ -11,18 +14,31 @@ Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js �
 + 自动转换 JSON 数据
 + 客户端支持防御 `XSRF`(跨站请求伪造)
 
-### axios安装  vue-resource 尤 不再维护  推荐使用axios
+### axios安装  vue-resource 尤雨溪 不再维护  推荐使用axios
 
 使用 npm:
 
 ``` html
 npm install axios --save
+import axios from "axios"
 ```
 使用 cdn:
 ``` html
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 ```
+### axios中文文档(非官方)
+https://www.kancloud.cn/yunye/axios/234845
 
+### axios 官方文档地址(英文)
+https://github.com/axios/axios
+
+### axios返回的数据
++ config 请求的时候附带的配置参数
++ data 后端返回的数据
++ headers  请求头 里面包含发送给后端的格式 `application/json;charset=UTF-8`
++ request  ajax请求
++ status  返回的状态码
++ statusText  返回的状态文字
 ### 不凡电影接口 
 + 服务器地址 
 http://59.110.138.169
@@ -118,7 +134,8 @@ axios 使用 post 发送数据时，默认是直接把 json 放到请求体中�
 在HTTP协议消息头中，使用Content-Type来表示请求和响应中的媒体类型信息。它用来告诉服务端如何处理请求的数据，以及告诉客户端（一般是浏览器）如何解析响应的数据，比如显示图片，解析并展示html等等。
 **post请求常见的数据格式（content-type）**
 
-1. `Content-Type: application/json` ： 请求体中的数据会以json字符串的形式发送到后端(axios默认的)
+1. `Content-Type: application/json` ： 请求体中的数据会以json字符串的形式发送到后端(axios默认的) 会导致后端接收不到我们发送给后端的数据
+
 2. `Content-Type: application/x-www-form-urlencoded`：请求体中的数据会以普通表单形式（键值对）发送到后端
 
 解决方法
@@ -152,31 +169,36 @@ export default {
 <script>
 import axios from "axios";
 import qs from "qs";
-let datas = {
-        Mob:18311111111,
-        validcode:"815961",
-        use:"regiVali"
-      };
-let params = qs.stringify(datas)
 export default {
-  methods: {
-    init(){
-      axios.post('http://localhost:3000/user',params )
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  name: '',
+  data() { 
+    return {
+
     }
   },
-  created () {
-    this.init();
+  methods: {
+      add(){
+          // post
+          // post请求如果附带参数 那么需要附带的参数用qs.stringify转一下
+        var obj = {
+            name:"张飞1",
+            age:10,
+            sex:1,
+            tel:123,
+            address:"不凡1",
+            school:"不凡1",
+        }
+        axios.post("http://59.110.138.169/api/ajax/user/save",qs.stringify(obj)
+        )
+      }
   }
-}
+ }
 </script>
 ```
 ### axios执行多个并发请求
+
+一次执行多次ajax请求
+promise.all
 执行多个并发请求是通过`axios.all`完成  
 `axios.all([function , function , ...])`
 请求完成之后 会以数组的形式返回全部的请求数据
@@ -211,10 +233,13 @@ export default {
 }
 </script>
 ```
+
 ### 全局的 axios 默认值
+
 + `axios.defaults.baseURL` 设置默认公共请求地址baseURL
 当我们的项目里面有很多的接口时 设置默认baseURL对后期的维护很有必要 
 例如 开发环境访问的是开发时的数据库 生产环境访问的是线上数据库 开发和生产访问的不是一个地址
+在请求的时候自动的在地址前面加上设置的baseUrl
 (开发环境是本地开发时的环境 生产环境是打包之后的环境)
 ``` html
 <script>
@@ -226,6 +251,8 @@ if(process.env.NODE_ENV == "development"){
 </script>
 ```
 + `axios.defaults.headers.common['token'] = token`;
+token是登陆的时候返回的token 如果后端让在别的页面请求数据的是附带token 
+`axios.defaults.headers.common['token'] = localStorage["token"]  `
 如果你每次请求接口需要验证，就加这个，不需要验证那就不用加
 
 + qs.stringify()
@@ -271,7 +298,9 @@ export default {
 
   当后端返回数据过慢时设置了超时就会自动断开请求
 
+
 ### axios拦截器 interceptors  
+
 页面发送http请求，很多情况我们要对请求和其响应进行特定的处理；如果请求数非常多，单独对每一个请求进行处理会变得非常麻烦，程序的优雅性也会大打折扣。好在强大的axios为开发者提供了这样一个API：拦截器。拦截器分为 请求（request）拦截器和 响应（response）拦截器。
 > 前端请求接口时首先向服务端发送请求的接口加参数 这个步骤称之为request
 request 对象代表了一个HTTP请求，其具有一些属性来保存请求中的一些数据，比如params string，body，HTTP headers等等。
@@ -285,8 +314,22 @@ response里面存放的就是服务端返回给我们的数据，包括状态码
 axios拦截器就是对这请求前和返回数据后的这两个过程执行操作
 
 ### axios拦截器 开始 类似路由守卫
++ elementui安装
+  - 安装elementui cnpm install element-ui --save
+  - 注册element
+```html
+<script>
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+Vue.use(ElementUI);
+</script>
+
+```
+  
 + 请求拦截器
   - config里面包含请求的参数 如请求地址 请求类似 请求参数等
+在请求的时候执行一些操作 比如开启loading弹窗 可以想象成router的导航守卫
 ```html
 <script>
 axios.interceptors.request.use(function (config) {
@@ -308,12 +351,14 @@ axios.interceptors.request.use(function (config) {
 
 ```
 + 响应拦截器
+比如响应数据之后关闭loading弹窗 
 ```html
 <script>
 axios.interceptors.response.use(function (config) {
     // 在请求之后做处理 如关闭loading
   loadings.close();
-    return config;
+  // 对返回过来的数据进行过滤操作
+    return config.data;
 }, function (error) {
     // 对请求失败做处理
     loadings.close();
